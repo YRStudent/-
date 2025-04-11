@@ -1,4 +1,3 @@
-搜狗翻译正在翻译... 
 # 知识图谱流程梳理  
 毕业论文是做的知识图谱方向的，来整理一下做的整个流程，以供参考。  
 ## 知识图谱构建流程  
@@ -39,10 +38,16 @@ R-BERT
 这个是参考的这篇论文，我觉得很逻辑很精简，对于只抽取简单关系的，这个模型其实还行，但一旦面对复杂的关系语义，这个模型就不中了。。
 Wu S, He Y. Enriching pre-trained language model with entity information for relation classification[C]//Proceedings of the 28th ACM international conference on information and knowledge management. New York, NY, USA: Association for Computing Machinery, 2019: 2361-2364.
 我看wos上也有针对这个模型进行改进的 可自行搜索
-5. 实体及关系的连接  
+——主要流程移步至：https://github.com/YRStudent/R-BERT-for-relation-extraction
+4. 实体及关系的连接  
 ——构建了一张连接规则表  
 ——这里就设计了单箭头指向的首尾实体类型+关系类型的一张规则表  
 ——由于R-BERT的模式是需要输入头尾实体进去的，因此，在这里做了一个特别笨的方法，就是将一句话中，从头到尾的实体依次进行排列组合，并结合实体抽取模型部分识别出的实体类型，形成一个（头实体，尾实体，头实体类型，尾实体类型），但将它输送进去之前，因为存在太多杂乱的元组了，那么这里的规则表就发挥着若头尾实体类型在规则表内就保留，若不存在那就删掉，最后把这些实体对输送进R-BERT模型中，让它来帮忙预测实体对间的关系。
 ——其实这一步骤就能感受出来误差是在传递的，因为一旦实体部分的实体类型预测错了，跟着后面的关系筛选也要错的...
+#### 联合抽取模型
+这部分就主要参考的BERT4torch部分了，甩个链接：  
+https://github.com/Tongjilibo/bert4torch
+
+
 
 
